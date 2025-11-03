@@ -3,9 +3,8 @@ out vec4 color;
 
 void main()
 {
-    // 圆形点
     vec2 coord = gl_PointCoord - vec2(0.5);
     if(length(coord) > 0.5) discard;
 
-    color = vec4(1.0, 0.0, 0.0, 1.0);  // 红色
+    color = vec4(1.0, 0.0, 0.0, 1.0);
 }

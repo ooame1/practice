@@ -10,3 +10,7 @@ wheels/
 .venv
 
 output/
+resource/calibration_images
+resource/target_frame.jpg
+
+.DS_Store

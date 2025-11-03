@@ -45,9 +45,6 @@ def main():
     if MatrixID == -1:
         print("Warning: Could not find uniform 'MVP' in shader program.")
 
-
-    
-
     Projection = glm.perspective(glm.radians(45.0), WIDTH / HEIGHT, 0.1, 100.0)
 
     View = glm.lookAt(
@@ -55,13 +52,9 @@ def main():
         glm.vec3(0, 0, 0),
         glm.vec3(0, 1, 0)
     )
-    
 
     Model = glm.mat4(1.0)
     MVP = Projection * View * Model
-
-
-    
 
     g_vertex_buffer_data = np.array([
         -1.0, -1.0, 0.0,

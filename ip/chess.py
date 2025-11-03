@@ -17,13 +17,10 @@ objp = objp * SQUARE_SIZE
 CAP_DEVICE = 0
 cap = cv.VideoCapture(CAP_DEVICE)
 if not cap.isOpened():
-    print("错误: 无法打开摄像头")
     exit()
 
 CALIBRATION_FRAMES = 15
 frames_collected = 0
-
-print(f"目标收集 {CALIBRATION_FRAMES} 帧...")
 
 while frames_collected < CALIBRATION_FRAMES:
     ret, frame = cap.read()
@@ -49,7 +46,6 @@ while frames_collected < CALIBRATION_FRAMES:
             objpoints.append(objp)
             imgpoints.append(corners_refined)
             frames_collected += 1
-            print(f"--- 帧 {frames_collected}/{CALIBRATION_FRAMES} 已保存 ---")
 
             cv.waitKey(500) 
             text_color = (255, 0, 0)
@@ -69,18 +65,13 @@ while frames_collected < CALIBRATION_FRAMES:
 cap.release()
 cv.destroyAllWindows()
 if frames_collected < 5:
-    print("错误: 收集的有效帧数过少，无法执行校准。")
     exit()
 
-print("\n--- 开始执行相机标定 ---")
 ret_cal, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 print("-" * 30)
 if ret_cal:
-    print("相机标定成功!")
-    print("\n相机内参矩阵 (mtx):")
     print(mtx)
-    print("\n畸变系数 (dist):")
     print(dist)
 else:
-    print("相机标定失败。请检查棋盘格和图像质量。")
+    print("failed")
 print("-" * 30)
